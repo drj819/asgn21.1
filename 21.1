@@ -1,0 +1,60 @@
+getwd()
+p='C:/Users/Admin/Downloads'
+setwd(p)
+list.dirs()
+list.files()
+library(readr)
+epi_r <- read.csv("C:/Users/Admin/Downloads/epi_r.csv")
+View(epi_r)
+data<-epi_r
+View(data)
+head(data, n=10)
+data(package="arules")
+dt <- split(data$rating, data$arizona)
+dt
+itemFrequency(dt2, type = "relative")
+itemFrequencyPlot(dt2,support= 0.10)
+rules = apriori(dt2, parameter=list(support=0.005, confidence=0.8))
+rules = apriori(dt2, parameter=list(support=0.005, confidence=0.8, minlen = 3))
+rules = apriori(dt2, parameter=list(support=0.005, confidence=0.8, maxlen = 4))
+rules
+summary(rules)
+
+inspect(rules[1:10]) 
+
+inspect( subset( rules, subset = rhs %pin% "0" )[1:10])
+
+options(digits=2)
+inspect(rules[1:10])
+
+summary(rules)
+plot(rules)
+plot(rules, method = "graph", interactive = T)
+
+
+library(splitstackshape)
+Rules4=cSplit(rules3, "rules","=>")
+names(Rules4)[names(Rules4) == 'rules_1'] <- 'LHS'
+Rules5=cSplit(Rules4, "LHS",",")
+Rules6=subset(Rules5, select= -c(rules_2))
+names(Rules6)[names(Rules6) == 'rules_3'] <- 'RHS'
+rules<-apriori(data=dt, parameter=list(supp=0.001,conf = 0.8),appearance = list(default="rhs",lhs="0"),control = list(verbose=F))
+rules<-sort(rules, decreasing=TRUE,by="confidence")
+inspect(rules[1:5])
+rules
+support<-seq(0.01,0.1,0.01)
+support
+rules_count<-c(472,128,46,26,14, 10, 10,8,8,8)
+rules_count
+library(factoextra)
+res.pca <- prcomp(data1.active, scale = TRUE)
+res.pca
+summary(res.pca)
+fviz_eig(res.pca)
+fviz_pca_ind(res.pca, col.ind = "cos2", 
+ library(factoextra)
+eig.val <- get_eigenvalue(res.pca)
+ eig.val
+ res.var <- get_pca_var(res.pca)
+             
+
